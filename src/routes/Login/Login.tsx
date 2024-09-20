@@ -13,7 +13,7 @@ const Login = () => {
                     <input type="text" placeholder="Email" id="campo-email"/>
                 </div>
                 <div className="campo-formulario">
-                    <input type="text" placeholder="Senha"/>
+                    <input type="password" placeholder="Senha"/>
                 </div>
                 
                 <p id="alterar-senha">Esqueci a senha</p>
