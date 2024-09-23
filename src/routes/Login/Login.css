@@ -1,0 +1,85 @@
+.area-login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+    width: 100%;
+    flex-direction: column;
+}
+
+.area-texto-login h1 {
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.area-texto-login p {
+    text-align: center;
+    color: #666666;
+    margin-bottom: 30px;
+    font-size: 15px;
+}
+
+.area-caixa-formulario {
+    display: flex;
+    flex-direction: column;
+    height: 350px;
+    width: 450px;
+    margin: 30px auto; /* Centraliza a caixa na página */
+    background-color: white; /* Fundo branco */
+    border-radius: 10px; /* Bordas arredondadas */
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1); /* Sombra */
+    text-align: center;
+}
+
+#campo-email {
+    margin-top: 40px;
+}
+
+.campo-formulario input {
+    width: 65%;
+    height: 35px;
+    margin: 10px;
+    border-radius: 8px;
+    border: 1px;
+    opacity: 0px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #999999
+}
+
+.area-login #alterar-senha {
+    text-align: end;
+    color: #666666;
+    margin-right: 68px;
+    margin-bottom: 40px;
+    font-size: 15px;
+}
+
+.area-login button {
+    color: #F0F0F0;
+    padding: 14px 12px;
+    width: 35%;
+    border: 1px solid transparent;
+    border-radius: 12px;
+    background-color:#0886E1;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 40px;
+}
+
+.area-login button:hover {
+    color: #0886E1;
+    background-color: #F0F0F0;
+    border: 1px solid #0886E1;
+}
+
+.area-registrar {
+    margin-top: 30px;
+}
+
+.area-registrar a {
+    text-decoration: none;
+    color: inherit;
+}
