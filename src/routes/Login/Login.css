@@ -60,7 +60,7 @@
     color: #F0F0F0;
     padding: 14px 12px;
     width: 35%;
-    border: none;
+    border: 1px solid transparent;
     border-radius: 12px;
     background-color:#0886E1;
     cursor: pointer;
