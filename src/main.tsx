@@ -7,7 +7,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 //Pages
 import Login from './routes/Login/Login.tsx';
-import Registro from './routes/Registro.tsx';
+import Registro from './routes/Registro/Registro.tsx';
 
 const router = createBrowserRouter([
   {
