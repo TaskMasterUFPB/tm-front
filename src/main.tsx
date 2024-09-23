@@ -8,6 +8,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 //Pages
 import Login from './routes/Login/Login.tsx';
 import Registro from './routes/Registro/Registro.tsx';
+import Task from './routes/Task/Task.tsx'
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
       {
         path:"/registro",
         element: <Registro />
+      },
+      {
+        path:"/task",
+        element: <Task/>
       }
     ]
   }
