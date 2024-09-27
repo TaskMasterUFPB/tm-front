@@ -9,6 +9,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from './routes/Login/Login.tsx';
 import Registro from './routes/Registro/Registro.tsx';
 import Task from './routes/Task/Task.tsx'
+import Projeto from './routes/Projeto/Projeto.tsx';
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         path:"/task",
         element: <Task/>
+      },
+      {
+        path:"/projeto",
+        element:<Projeto/>
       }
     ]
   }
