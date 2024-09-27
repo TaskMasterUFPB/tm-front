@@ -1,4 +1,4 @@
-import { UserProps } from "../../types/User";
+import { UserRegistroProps } from "../../types/UserRegistro";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import './Registro.css';
@@ -6,10 +6,11 @@ import './Registro.css';
 const Registro = () => {
     const navigate = useNavigate();
 
-    const [user, setUser] = useState<UserProps>({
+    const [user, setUser] = useState<UserRegistroProps>({
         nome: '',
         email: '',
-        senha: ''
+        senha: '',
+        confirmarSenha: ''
     });
 
     // Função para lidar com a mudança dos campos do formulário
@@ -22,12 +23,14 @@ const Registro = () => {
 
     // Função para salvar o usuário no localStorage
     const handleSubmit = () => {
-        if (user.nome && user.email && user.senha) {
+        if (user.nome && user.email && (user.senha === user.confirmarSenha)) {
             // Salva o usuário no localStorage
             localStorage.setItem('user', JSON.stringify(user));
             alert('Usuário registrado com sucesso!');
             navigate("/");
-        } else {
+        } else if (user.senha !== user.confirmarSenha) {
+            alert('Os campos de Senha e Confirmar Senha devem ser idênticos. Por favor, verifique e tente novamente.')
+        }else {
             alert('Por favor, preencha todos os campos!');
         }
     };
@@ -70,7 +73,10 @@ const Registro = () => {
                 <div className="campo-formulario-r">
                     <input 
                         type="password" 
+                        name="confirmarSenha"
+                        value={user.confirmarSenha}
                         placeholder="Confirmar senha" 
+                        onChange={handleChange}
                     />
                 </div>
                 <button onClick={handleSubmit}>Criar</button>
