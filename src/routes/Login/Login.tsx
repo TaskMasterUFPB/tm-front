@@ -28,7 +28,7 @@ const Login = () => {
             // Verifica se o email e a senha correspondem
             if (user.email === userLogin.email && user.senha === userLogin.senha) {
                 alert('Login bem-sucedido!');
-                navigate('/task'); // Redireciona para a página principal (exemplo)
+                navigate('/projeto'); // Redireciona para a página principal (exemplo)
             } else {
                 alert('Email ou senha incorretos!');
             }
