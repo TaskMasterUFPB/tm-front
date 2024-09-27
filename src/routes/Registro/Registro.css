@@ -2,9 +2,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 120vh;
+    height: 100vh;
     width: 100%;
-    flex-direction: column; 
+    flex-direction: column;
 }
 
 .area-texto-registro h1 {
@@ -20,15 +20,19 @@
     font-size: 15px;
 }
 
-.area-caixa-formulario-r { 
+.area-caixa-formulario-r {
     display: flex;
     flex-direction: column;
     height: 550px;
     width: 450px;
-    margin: 30px auto; /* Centraliza a caixa na página */
-    background-color: white; /* Fundo branco */
-    border-radius: 10px; /* Bordas arredondadas */
-    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1); /* Sombra */
+    margin: 30px auto;
+    /* Centraliza a caixa na página */
+    background-color: white;
+    /* Fundo branco */
+    border-radius: 10px;
+    /* Bordas arredondadas */
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1);
+    /* Sombra */
     text-align: center;
 }
 
@@ -54,7 +58,7 @@
     width: 35%;
     border: 1px solid transparent;
     border-radius: 12px;
-    background-color:#0886E1;
+    background-color: #0886E1;
     cursor: pointer;
     margin: 0 auto;
     margin-top: 50px;
@@ -76,4 +80,3 @@
     text-decoration: none;
     color: inherit;
 }
-
