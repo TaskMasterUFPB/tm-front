@@ -78,14 +78,6 @@ const Login = () => {
                     onClick = {handleLogin}
                     width = "35%"
                 />
-
-                <Button
-                    label = "Teste_Button-Tam-Input(Block)"
-                    onClick = {handleLogin}
-                    disabled = {true}
-                    width = "65%"
-                />  
-                
             </div>
             <div className="area-registrar">
                 <p>
