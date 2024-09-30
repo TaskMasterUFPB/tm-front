@@ -1,0 +1,34 @@
+.button-customizavel{
+    background-color: #0886E1;
+    color: #F0F0F0;;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    padding: 14px 12px;
+    width: 35%;
+    text-align: center;
+    font-size: 16px;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 40px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button-customizavel:hover{
+    color: #0886E1;
+    background-color: #F0F0F0;
+    border-color:#0886E1;
+}
+
+.button-customizavel:active {
+    background-color: #085992;
+    color: #F0F0F0;
+    border-color:#085992;
+}
+
+.button-customizavel.disabled,
+.button-customizavel:disabled{
+    background-color: #085992;
+    cursor: not-allowed;
+    color: #F0F0F0;
+}

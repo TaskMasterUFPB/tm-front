@@ -23,7 +23,10 @@
 .area-caixa-formulario {
     display: flex;
     flex-direction: column;
-    height: 350px;
+    justify-content: space-between;
+    /* Distribui o espaço entre os elementos */
+    height: auto;
+    /* A altura da caixa vai se adaptar ao conteúdo */
     width: 450px;
     margin: 30px auto;
     /* Centraliza a caixa na página */
@@ -36,20 +39,21 @@
     text-align: center;
 }
 
-#campo-email {
+.campo-formulario-email {
     margin-top: 40px;
+    width: 100%;
+    /* Faz os campos ocuparem toda a largura da caixa */
+    display: flex;
+    justify-content: center;
+    /* Centraliza o input dentro do campo */
 }
 
-.campo-formulario input {
-    width: 65%;
-    height: 35px;
-    margin: 10px;
-    border-radius: 8px;
-    border: 1px;
-    opacity: 0px;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #999999
+.campo-formulario-senha {
+    width: 100%;
+    /* Faz os campos ocuparem toda a largura da caixa */
+    display: flex;
+    justify-content: center;
+    /* Centraliza o input dentro do campo */
 }
 
 .area-login #alterar-senha {
@@ -80,7 +84,8 @@
 }
 
 .area-registrar {
-    margin-top: 30px;
+    margin-top: 20px;
+    text-align: center;
 }
 
 .area-registrar a {
