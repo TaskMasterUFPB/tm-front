@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 90vh;
+    height: 100vh;
     width: 100%;
     flex-direction: column;
 }
@@ -25,10 +25,14 @@
     flex-direction: column;
     height: 350px;
     width: 450px;
-    margin: 30px auto; /* Centraliza a caixa na página */
-    background-color: white; /* Fundo branco */
-    border-radius: 10px; /* Bordas arredondadas */
-    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1); /* Sombra */
+    margin: 30px auto;
+    /* Centraliza a caixa na página */
+    background-color: white;
+    /* Fundo branco */
+    border-radius: 10px;
+    /* Bordas arredondadas */
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1);
+    /* Sombra */
     text-align: center;
 }
 
@@ -62,7 +66,7 @@
     width: 35%;
     border: 1px solid transparent;
     border-radius: 12px;
-    background-color:#0886E1;
+    background-color: #0886E1;
     cursor: pointer;
     display: block;
     margin: 0 auto;
