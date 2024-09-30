@@ -15,7 +15,8 @@
     align-items: center;
 }
 
-.barra-de-pesquisa h1, .barra-de-pesquisa button {
+.barra-de-pesquisa h1,
+.barra-de-pesquisa button {
     color: #333;
 }
 
@@ -92,8 +93,7 @@ h1 {
     width: 100%;
     border-radius: 10px;
     border-collapse: collapse;
-    box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.1);
-
+    box-shadow: 10px 10px 50px 0px rgba(0, 0, 0, 0.25);
 }
 
 .caixa-projetos tr {
@@ -101,7 +101,8 @@ h1 {
     border-top-right-radius: 10px;
 }
 
-.caixa-projetos th, .caixa-projetos td {
+.caixa-projetos th,
+.caixa-projetos td {
     padding: 12px;
     border-bottom: 2px solid #CCCCCC;
 }
@@ -124,12 +125,14 @@ h1 {
 
 tbody td {
     text-align: left;
-    padding: 20px; /* Ajusta o padding para aumentar a altura das linhas vazias */
+    padding: 20px;
+    /* Ajusta o padding para aumentar a altura das linhas vazias */
     border-bottom: 1px solid #eee;
 }
 
 tbody tr:last-child td {
-    border-bottom: none; /* Remove a borda da última linha */
+    border-bottom: none;
+    /* Remove a borda da última linha */
 }
 
 .caixa-projetos a {
