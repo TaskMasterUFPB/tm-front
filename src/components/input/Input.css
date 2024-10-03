@@ -1,0 +1,32 @@
+/* Estilos básicos do input */
+.input-customizavel {
+  width: 65%;
+  height: 35px;
+  margin: 10px;
+  border-radius: 8px;
+  border: 1px;
+  opacity: 0px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #999999
+}
+
+/* Remove o contorno padrão do navegador ao focar */
+.input-customizavel:focus {
+    outline: none;
+}
+  
+  /* Estilo quando o input está focado */
+  .input-customizavel.inputfocado {
+    border: 2px solid #0886E1; /* Altera a cor da borda */
+    background-color: #f0f0f0;
+    overflow: auto; /* Agora o overflow será rolável */
+  }
+  
+  /* Estilo quando o input está desabilitado */
+  .input-customizavel:disabled {
+    background-color: #e0e0e0;
+    border-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+  }

@@ -1,13 +1,15 @@
 import { UserLoginProps } from "../../types/UserLogin";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import Input from "../../components/input/Input";
+import Button from "../../components/button/Button";
 import './Login.css'
 
 const Login = () => {
     const navigate = useNavigate();
 
     const [userLogin, setUserLogin] = useState<UserLoginProps>({
-        email: '',
+        email:'',
         senha:''
     })
 
@@ -43,29 +45,39 @@ const Login = () => {
                 <h1>Bem-vindo</h1>
                 <p>Acesse utilizando seu e-mail e senha.</p>
             </div>
-            <div className="area-caixa-formulario">
-                <div className="campo-formulario">
-                    <input 
-                        type="text" 
-                        name="email"
-                        placeholder="Email" 
-                        id="campo-email"
-                        value={userLogin.email}
-                        onChange={handleChange}
+            <div className="area-caixa-formulario">           
+
+                <div className="campo-formulario-email">
+                    <Input
+                        id = "email"
+                        name = "email"
+                        type = "email"
+                        value = {userLogin.email}
+                        onChange = {handleChange}
+                        placeholder = "Email"
+                        width = "65%"
                     />
                 </div>
-                <div className="campo-formulario">
-                    <input 
-                        type="password" 
-                        name="senha"
-                        placeholder="Senha"
-                        value={userLogin.senha}
-                        onChange={handleChange}
+
+                <div className="campo-formulario-senha">
+                    <Input
+                        id = "senha"
+                        name = "senha"
+                        type = "password"
+                        value = {userLogin.senha}
+                        onChange = {handleChange}
+                        placeholder = "Senha"
+                        width = "65%"
                     />
                 </div>
                 
                 <p id="alterar-senha">Esqueci a senha</p>
-                <button onClick={handleLogin}>Entrar</button>
+
+                <Button
+                    label = "Entrar"
+                    onClick = {handleLogin}
+                    width = "35%"
+                />
             </div>
             <div className="area-registrar">
                 <p>
