@@ -1,21 +1,39 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import './Projeto.css';
+import { projetoApi } from "../../server/projeto";
+import { ProjetoProps } from "../../types/Projeto";
+import { jwtDecode } from "jwt-decode";
+import { DecodedToken } from "../../types/Jwt";
 
 const Projeto = () => {
-
     const [searchTerm, setSearchTerm] = useState("");
+    const [projetos, setProjetos] = useState<ProjetoProps[]>([]);
+    const [id, setId] = useState("");
+
     let maxRows = 6;
+    let emptyRows = maxRows - projetos.length;
 
     // Lista de projetos simulada (pode vir de uma API)
-    const projects = [
-        { name: "Pessoas Sociais", type: "Projeto Pessoal com Ideias Futuras", leader: "Gustavo Theotonio", url: "localhost:3030" },
-        { name: "E-commerce", type: "Projeto Freelancer com Ix", leader: "João Alberto", url: "www.ecommercejr.com" },
-    ];
+    async function listarProjetos(id: string) {
+        try {
+            const resposta = await projetoApi.listaProjetos(id);
+            setProjetos(resposta.data)
+        } catch (error) {
+            alert("Erro ao listar projetos")
+        }
+    }
 
-    let emptyRows = maxRows - projects.length;
+    useEffect(() => {
+        const token = localStorage.getItem("userJwt");
+        if (token) {
+            const decode: DecodedToken = jwtDecode(token)
+            setId(decode.id)
+            listarProjetos(decode.id);
+        }
+    }, [id])
 
-    return(
+    return (
         <div className="area-projeto">
             <nav className="barra-de-pesquisa">
                 <h1>Logo</h1>
@@ -47,16 +65,16 @@ const Projeto = () => {
                         </tr>
                     </thead>
                     <tbody>
-                    {projects.filter(project =>
-                            project.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                            project.type.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                            project.leader.toLowerCase().includes(searchTerm.toLowerCase())
+                        {projetos.filter(project =>
+                            project.nome.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                            project.descricao.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                            project.lider.toLowerCase().includes(searchTerm.toLowerCase())
                         ).map(project => (
-                            <tr key={project.name}>
-                                <td>{project.name}</td>
-                                <td>{project.type}</td>
-                                <td>{project.leader}</td>
-                                <td><a href={`http://${project.url}`} target="_blank" rel="noopener noreferrer">{project.url}</a></td>
+                            <tr key={project.id}>
+                                <td>{project.nome}</td>
+                                <td>{project.descricao}</td>
+                                <td>{project.lider}</td>
+                                <td><a href={`${project.url}`} target="_blank" rel="noopener noreferrer">{project.url}</a></td>
                                 <td>...</td>
                             </tr>
                         ))}
