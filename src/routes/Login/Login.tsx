@@ -4,13 +4,19 @@ import { useState } from "react";
 import Input from "../../components/input/Input";
 import Button from "../../components/button/Button";
 import './Login.css'
+import { usuarioApi } from "../../server/usuario";
 
 const Login = () => {
     const navigate = useNavigate();
 
     const [userLogin, setUserLogin] = useState<UserLoginProps>({
+<<<<<<< Updated upstream
         email:'',
         senha:''
+=======
+        email: '',
+        senha: ''
+>>>>>>> Stashed changes
     })
 
     // Função para lidar com a mudança dos campos do formulário
@@ -22,22 +28,38 @@ const Login = () => {
     };
 
     // Função para fazer o login
-    const handleLogin = () => {
-        const savedUser = localStorage.getItem('user');
-        if (savedUser) {
-            const user = JSON.parse(savedUser);
+    // const handleLogin = () => {
+    //     const savedUser = localStorage.getItem('user');
+    //     if (savedUser) {
+    //         const user = JSON.parse(savedUser);
 
-            // Verifica se o email e a senha correspondem
-            if (user.email === userLogin.email && user.senha === userLogin.senha) {
-                alert('Login bem-sucedido!');
-                navigate('/projeto'); // Redireciona para a página principal (exemplo)
-            } else {
-                alert('Email ou senha incorretos!');
+    //         // Verifica se o email e a senha correspondem
+    //         if (user.email === userLogin.email && user.senha === userLogin.senha) {
+    //             alert('Login bem-sucedido!');
+    //             navigate('/projeto'); // Redireciona para a página principal (exemplo)
+    //         } else {
+    //             alert('Email ou senha incorretos!');
+    //         }
+    //     } else {
+    //         alert('Usuário não encontrado! Por favor, registre-se.');
+    //     }
+    // };
+
+    async function handleLogin() {
+        try {
+            const resposta = await usuarioApi.login(
+                userLogin.email,
+                userLogin.senha
+            )
+
+            if (resposta.status === 200) {
+                localStorage.setItem('userJwt', resposta.data.token)
+                navigate('/projeto')
             }
-        } else {
-            alert('Usuário não encontrado! Por favor, registre-se.');
+        } catch (error) {
+            alert('Email ou senha incorretos!')
         }
-    };
+    }
 
     return (
         <div className="area-login">
@@ -45,6 +67,7 @@ const Login = () => {
                 <h1>Bem-vindo</h1>
                 <p>Acesse utilizando seu e-mail e senha.</p>
             </div>
+<<<<<<< Updated upstream
             <div className="area-caixa-formulario">           
 
                 <div className="campo-formulario-email">
@@ -68,9 +91,29 @@ const Login = () => {
                         onChange = {handleChange}
                         placeholder = "Senha"
                         width = "65%"
+=======
+            <div className="area-caixa-formulario">
+                <div className="campo-formulario">
+                    <input
+                        type="text"
+                        name="email"
+                        placeholder="Email"
+                        id="campo-email"
+                        value={userLogin.email}
+                        onChange={handleChange}
                     />
                 </div>
-                
+                <div className="campo-formulario">
+                    <input
+                        type="password"
+                        name="senha"
+                        placeholder="Senha"
+                        value={userLogin.senha}
+                        onChange={handleChange}
+>>>>>>> Stashed changes
+                    />
+                </div>
+
                 <p id="alterar-senha">Esqueci a senha</p>
 
                 <Button
