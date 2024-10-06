@@ -4,6 +4,7 @@ import { useState } from "react";
 import Input from "../../components/input/Input";
 import Button from "../../components/button/Button";
 import './Login.css'
+import { usuarioApi } from "../../server/usuario";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -68,6 +69,7 @@ const Login = () => {
                         width="65%"
                     />
                 </div>
+
 
                 <p id="alterar-senha">Esqueci a senha</p>
 
