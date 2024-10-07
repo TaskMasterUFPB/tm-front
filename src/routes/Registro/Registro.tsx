@@ -37,7 +37,7 @@ const Registro = () => {
             }
             if (resposta.status === 201) {
                 localStorage.setItem('userJwt', resposta.data.token)
-                navigate('/login')
+                navigate('/')
             }
         } catch (error) {
             resetaForm()

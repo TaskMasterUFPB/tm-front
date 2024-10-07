@@ -45,7 +45,6 @@ const Login = () => {
                 <p>Acesse utilizando seu e-mail e senha.</p>
             </div>
             <div className="area-caixa-formulario">
-
                 <div className="campo-formulario-email">
                     <Input
                         id="email"
