@@ -69,6 +69,7 @@ const Login = () => {
                     />
                 </div>
 
+
                 <p id="alterar-senha">Esqueci a senha</p>
 
                 <Button
@@ -82,7 +83,7 @@ const Login = () => {
                     Não possui conta? <Link to='/registro'><b>Registre-se</b></Link>
                 </p>
             </div>
-        </div>
+        </div >
     )
 }
 

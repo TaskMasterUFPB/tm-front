@@ -1,74 +1,62 @@
 import { Link, useNavigate } from "react-router-dom";
-import { CriarProjetoProps } from "../../types/CriarProjeto";
-import { useState, useEffect } from "react";
-import Button from "../../components/button/Button";
+import { useEffect, useState } from "react";
 import './Projeto.css';
+import { projetoApi } from "../../server/projeto";
+import { ProjetoProps } from "../../types/Projeto";
+import { jwtDecode } from "jwt-decode";
+import { DecodedToken } from "../../types/Jwt";
+import Button from "../../components/button/Button";
 
 const Projeto = () => {
-    const [projeto, setProjeto] = useState<CriarProjetoProps>({
-        nome: '',
-        descricao: '',
-        lider: '',
-        url: '',
-        dataInicio: new Date(Date.now()),
-        deletado: false
-    });
+    const [searchTerm, setSearchTerm] = useState("");
+    const [projetos, setProjetos] = useState<ProjetoProps[]>([]);
+    const [id, setId] = useState("");
+
+    const [showModal, setShowModal] = useState(false);
+    let maxRows = 6;
+    let emptyRows = maxRows - projetos.length;
 
     // Função para lidar com a mudança dos campos do formulário
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setProjeto({
-            ...projeto,
+        setProjetos({
+            ...projetos,
             [e.target.name]: e.target.value,
         });
     };
 
     // Função para salvar o projeto
     const handleSubmit = () => {
-        if (projeto.nome && projeto.descricao && projeto.lider && projeto.url) {
-            const storedProjects = JSON.parse(localStorage.getItem('projects') || '[]');
-            const updatedProjects = [...storedProjects, projeto];
-            localStorage.setItem('projects', JSON.stringify(updatedProjects));
-            alert('Projeto cadastrado com sucesso');
-            setShowModal(false); // Fechar o modal após a submissão
-            loadProjectsFromLocalStorage(); // Atualizar a lista de projetos na página
-        } else {
-            alert('Por favor, preencha todos os campos!');
+
+    };
+
+    // Lista de projetos simulada (pode vir de uma API)
+    async function listarProjetos(id: string) {
+        try {
+            const resposta = await projetoApi.listaProjetos(id);
+            setProjetos(resposta.data)
+        } catch (error) {
+            alert("Erro ao listar projetos")
         }
-    };
+    }
 
-    const [projects, setProjects] = useState<CriarProjetoProps[]>([]); // Estado para armazenar os projetos
-    const [searchTerm, setSearchTerm] = useState("");
-    const [showModal, setShowModal] = useState(false);
-    let maxRows = 6;
-
-    // Função para carregar os projetos do localStorage
-    const loadProjectsFromLocalStorage = () => {
-        const storedProjects = JSON.parse(localStorage.getItem('projects') || '[]');
-        setProjects(storedProjects); // Atualizar o estado com os projetos armazenados
-    };
+    async function listarProjetosParticipantes(id: string) {
+        try {
+            const resposta = await projetoApi.listaProjetosParticipante(id);
+            setProjetos(prevProjetos => prevProjetos.concat(resposta.data))
+        } catch (error) {
+            alert("Erro ao listar projetos")
+        }
+    }
 
     useEffect(() => {
-        loadProjectsFromLocalStorage();
-    }, []);
-
-    // Apagar um objeto
-    const deleteProject = (projectName: string) => {
-        // Recuperar os projetos existentes no localStorage
-        const storedProjects = JSON.parse(localStorage.getItem('projects') || '[]');
-
-        // Filtrar o projeto a ser removido com base no nome
-        const updatedProjects = storedProjects.filter((project: CriarProjetoProps) => project.nome !== projectName);
-
-        // Atualizar o localStorage com a nova lista de projetos
-        localStorage.setItem('projects', JSON.stringify(updatedProjects));
-
-        // Atualizar o estado para refletir a mudança na UI
-        setProjects(updatedProjects);
-
-        alert('Projeto removido com sucesso!');
-    };
-
-    let emptyRows = maxRows - projects.length;
+        const token = localStorage.getItem("userJwt");
+        if (token) {
+            const decode: DecodedToken = jwtDecode(token)
+            setId(decode.id)
+            listarProjetos(decode.id);
+            listarProjetosParticipantes(decode.id);
+        }
+    }, [id])
 
     // Função para abrir o modal
     const handleOpenModal = () => {
@@ -116,19 +104,17 @@ const Projeto = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {projects.filter(project =>
+                        {projetos.filter(project =>
                             project.nome.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                            project.descricao.toLowerCase().includes(searchTerm.toLowerCase())
-                        ).map((project, index) => (
-                            <tr key={index}>
+                            project.descricao.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                            project.lider.toLowerCase().includes(searchTerm.toLowerCase())
+                        ).map(project => (
+                            <tr key={project.id}>
                                 <td>{project.nome}</td>
                                 <td>{project.descricao}</td>
                                 <td>{project.lider}</td>
-                                <td><a href={project.url} target="_blank" rel="noopener noreferrer">{project.url}</a></td>
-                                {/* <td>{new Date(project.dataInicio).toLocaleDateString()}</td> */}
-                                <td>
-                                    ...
-                                </td>
+                                <td><a href={`${project.url}`} target="_blank" rel="noopener noreferrer">{project.url}</a></td>
+                                <td>...</td>
                             </tr>
                         ))}
                         {[...Array(emptyRows > 0 ? emptyRows : 0)].map((_, index) => (
