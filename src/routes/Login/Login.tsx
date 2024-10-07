@@ -44,31 +44,6 @@ const Login = () => {
                 <h1>Bem-vindo</h1>
                 <p>Acesse utilizando seu e-mail e senha.</p>
             </div>
-<<<<<<< Updated upstream
-            <div className="area-caixa-formulario">           
-
-                <div className="campo-formulario-email">
-                    <Input
-                        id = "email"
-                        name = "email"
-                        type = "email"
-                        value = {userLogin.email}
-                        onChange = {handleChange}
-                        placeholder = "Email"
-                        width = "65%"
-                    />
-                </div>
-
-                <div className="campo-formulario-senha">
-                    <Input
-                        id = "senha"
-                        name = "senha"
-                        type = "password"
-                        value = {userLogin.senha}
-                        onChange = {handleChange}
-                        placeholder = "Senha"
-                        width = "65%"
-=======
             <div className="area-caixa-formulario">
                 <div className="campo-formulario">
                     <input
@@ -87,7 +62,6 @@ const Login = () => {
                         placeholder="Senha"
                         value={userLogin.senha}
                         onChange={handleChange}
->>>>>>> Stashed changes
                     />
                 </div>
 
