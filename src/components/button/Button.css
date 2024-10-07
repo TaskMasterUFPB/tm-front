@@ -1,7 +1,7 @@
 .button-customizavel{
     background-color: #0886E1;
     color: #F0F0F0;;
-    border: 2px solid transparent;
+    border: 1px solid transparent;
     border-radius: 12px;
     padding: 14px 12px;
     width: 35%;
@@ -17,7 +17,7 @@
 .button-customizavel:hover{
     color: #0886E1;
     background-color: #F0F0F0;
-    border-color:#0886E1;
+    border: 1px solid #0886E1;
 }
 
 .button-customizavel:active {

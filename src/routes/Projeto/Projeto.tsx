@@ -1,8 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
 import { CriarProjetoProps } from "../../types/CriarProjeto";
 import { useState, useEffect } from "react";
-import './Projeto.css';
 import Button from "../../components/button/Button";
+import './Projeto.css';
 
 const Projeto = () => {
     const [projeto, setProjeto] = useState<CriarProjetoProps>({
@@ -183,7 +183,10 @@ const Projeto = () => {
                                 type="text"
                                 placeholder="E-mails dos indivíduos"
                             />
-                            <div className="tag">Gustavo <span className="close-tag">x</span></div>
+
+                            <div className="input-container">
+                                <div className="tag">Gustavo <span className="close-tag">x</span></div>
+                            </div>
                         </div>
                         <div className="coluna-direita">
                             <label>Cargos</label>
@@ -191,27 +194,23 @@ const Projeto = () => {
                                 type="text"
                                 placeholder="Dev, Analista, QA, etc"
                             />
-                            <div className="tag">Dev <span className="close-tag">x</span></div>
+                            <div className="input-container">
+                                <div className="tag">Dev <span className="close-tag">x</span></div>
+                            </div>
+                            
 
                             <div className="area-btns">
-                                <button 
-                                    onClick={handleCloseModal}>
-                                    Cancelar
-                                </button>
-                                <button
-                                >
 
-                                </button>
-                                {/* <Button 
+                                <Button 
                                     label="Cancelar"
                                     onClick={handleCloseModal}
-                                    width="45%"
+                                    width="150px"
                                 />
                                 <Button
                                     label="Criar"
                                     onClick={handleSubmit}
-                                    width="45%"
-                                /> */}
+                                    width="150px"
+                                />
                             </div>
                         </div>
                         

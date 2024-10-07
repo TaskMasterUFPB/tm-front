@@ -194,7 +194,7 @@ tbody tr:last-child td {
     display: flex;
     flex-direction: column; /* Colocar os elementos um abaixo do outro */
     align-items: flex-start; /* Alinhar os itens ao início da coluna */
-    width: 30%; /* Cada coluna ocupará 30% do espaço */
+    width: calc(33.33% - 20px); /* Cada coluna ocupará 30% do espaço */
 }  
 
 /* Inputs do formulário */
@@ -204,4 +204,46 @@ tbody tr:last-child td {
     margin-bottom: 20px;
     border: 1px solid #ddd;
     border-radius: 4px;
+}
+
+.area-btns {
+    display: flex;
+    justify-content: space-between; /* Espaçar os botões igualmente */
+    align-items: start; /* Alinha os botões verticalmente ao centro */
+    flex-direction: row; /* Certifique-se de que os botões estão alinhados na mesma linha */
+    width: 100%;
+    margin-top: 20px;
+}
+
+.input-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: start;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    width: 70%;
+    height: 25%;
+    background-color: #fff;
+}
+
+.tag {
+    display: inline-flex;
+    align-items: center;
+    background-color: #d7e9f7; /* Cor de fundo azul claro */
+    color: #333;
+    padding: 6px 12px;
+    border-radius: 15px;
+    font-size: 14px;
+    margin-right: 8px;
+}
+
+.close-tag {
+    margin-left: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.close-tag:hover {
+    color: red;
 }
