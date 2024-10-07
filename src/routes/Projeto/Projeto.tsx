@@ -24,12 +24,22 @@ const Projeto = () => {
         }
     }
 
+    async function listarProjetosParticipantes(id: string) {
+        try {
+            const resposta = await projetoApi.listaProjetosParticipante(id);
+            setProjetos(prevProjetos => prevProjetos.concat(resposta.data))
+        } catch (error) {
+            alert("Erro ao listar projetos")
+        }
+    }
+
     useEffect(() => {
         const token = localStorage.getItem("userJwt");
         if (token) {
             const decode: DecodedToken = jwtDecode(token)
             setId(decode.id)
             listarProjetos(decode.id);
+            listarProjetosParticipantes(decode.id);
         }
     }, [id])
 
