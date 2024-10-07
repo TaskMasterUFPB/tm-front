@@ -1,0 +1,36 @@
+logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;  /* Cor de fundo para a área do logo */
+    padding: 20px;  /* Espaçamento interno */
+    border-radius: 10px;  /* Bordas arredondadas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Sombra suave */
+  }
+  
+  .nav-icons {
+    display: flex;
+    justify-content: center;  /* Alinhamento central dos itens */
+    margin-top: 20px;  /* Espaçamento acima */
+    gap: 40px;  /* Espaçamento entre os itens */
+  }
+  
+  .icon-item {
+    display: flex;
+    align-items: center;  /* Alinhamento vertical do texto com o ícone */
+    cursor: pointer;  /* Mudança do cursor ao passar o mouse */
+    color: #000;  /* Cor do texto */
+    text-decoration: none;  /* Sem sublinhado */
+    font-size: 16px;  /* Tamanho do texto */
+  }
+  
+  .icon {
+    font-size: 24px;  /* Tamanho do ícone */
+    margin-right: 8px;  /* Espaçamento entre o ícone e o texto */
+  }
+  
+  /* Removido efeito de hover */
+  .icon-item:hover {
+    color: inherit;  /* Manter a cor original ao passar o mouse */
+  }
+  

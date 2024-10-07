@@ -1,17 +1,15 @@
 import { UserLoginProps } from "../../types/UserLogin";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import Input from "../../components/input/Input";
-import Button from "../../components/button/Button";
 import './Login.css'
 
 const Login = () => {
     const navigate = useNavigate();
 
     const [userLogin, setUserLogin] = useState<UserLoginProps>({
-        email:'',
+        email: '',
         senha:''
-    })
+    });
 
     // Função para lidar com a mudança dos campos do formulário
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,7 +28,7 @@ const Login = () => {
             // Verifica se o email e a senha correspondem
             if (user.email === userLogin.email && user.senha === userLogin.senha) {
                 alert('Login bem-sucedido!');
-                navigate('/projeto'); // Redireciona para a página principal (exemplo)
+                navigate('/projeto'); // Redireciona para a página principal (projeto)
             } else {
                 alert('Email ou senha incorretos!');
             }
@@ -45,39 +43,29 @@ const Login = () => {
                 <h1>Bem-vindo</h1>
                 <p>Acesse utilizando seu e-mail e senha.</p>
             </div>
-            <div className="area-caixa-formulario">           
-
-                <div className="campo-formulario-email">
-                    <Input
-                        id = "email"
-                        name = "email"
-                        type = "email"
-                        value = {userLogin.email}
-                        onChange = {handleChange}
-                        placeholder = "Email"
-                        width = "65%"
+            <div className="area-caixa-formulario">
+                <div className="campo-formulario">
+                    <input 
+                        type="text" 
+                        name="email"
+                        placeholder="Email" 
+                        id="campo-email"
+                        value={userLogin.email}
+                        onChange={handleChange}
                     />
                 </div>
-
-                <div className="campo-formulario-senha">
-                    <Input
-                        id = "senha"
-                        name = "senha"
-                        type = "password"
-                        value = {userLogin.senha}
-                        onChange = {handleChange}
-                        placeholder = "Senha"
-                        width = "65%"
+                <div className="campo-formulario">
+                    <input 
+                        type="password" 
+                        name="senha"
+                        placeholder="Senha"
+                        value={userLogin.senha}
+                        onChange={handleChange}
                     />
                 </div>
                 
                 <p id="alterar-senha">Esqueci a senha</p>
-
-                <Button
-                    label = "Entrar"
-                    onClick = {handleLogin}
-                    width = "35%"
-                />
+                <button onClick={handleLogin}>Entrar</button>
             </div>
             <div className="area-registrar">
                 <p>
@@ -85,7 +73,9 @@ const Login = () => {
                 </p>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default Login;
+
+
