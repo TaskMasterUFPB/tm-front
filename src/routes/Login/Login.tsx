@@ -22,24 +22,6 @@ const Login = () => {
         });
     };
 
-    // Função para fazer o login
-    // const handleLogin = () => {
-    //     const savedUser = localStorage.getItem('user');
-    //     if (savedUser) {
-    //         const user = JSON.parse(savedUser);
-
-    //         // Verifica se o email e a senha correspondem
-    //         if (user.email === userLogin.email && user.senha === userLogin.senha) {
-    //             alert('Login bem-sucedido!');
-    //             navigate('/projeto'); // Redireciona para a página principal (exemplo)
-    //         } else {
-    //             alert('Email ou senha incorretos!');
-    //         }
-    //     } else {
-    //         alert('Usuário não encontrado! Por favor, registre-se.');
-    //     }
-    // };
-
     async function handleLogin() {
         try {
             const resposta = await usuarioApi.login(
