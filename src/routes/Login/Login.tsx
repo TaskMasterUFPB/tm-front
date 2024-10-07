@@ -10,8 +10,8 @@ const Login = () => {
     const navigate = useNavigate();
 
     const [userLogin, setUserLogin] = useState<UserLoginProps>({
-        email:'',
-        senha:''
+        email: '',
+        senha: ''
     })
 
     // Função para lidar com a mudança dos campos do formulário
@@ -45,32 +45,36 @@ const Login = () => {
                 <p>Acesse utilizando seu e-mail e senha.</p>
             </div>
             <div className="area-caixa-formulario">
-                <div className="campo-formulario">
-                    <input
-                        type="text"
+                <div className="campo-formulario-email">
+                    <Input
+                        id="email"
                         name="email"
-                        placeholder="Email"
-                        id="campo-email"
+                        type="email"
                         value={userLogin.email}
                         onChange={handleChange}
+                        placeholder="Email"
+                        width="65%"
                     />
                 </div>
-                <div className="campo-formulario">
-                    <input
-                        type="password"
+
+                <div className="campo-formulario-senha">
+                    <Input
+                        id="senha"
                         name="senha"
-                        placeholder="Senha"
+                        type="password"
                         value={userLogin.senha}
                         onChange={handleChange}
+                        placeholder="Senha"
+                        width="65%"
                     />
                 </div>
 
                 <p id="alterar-senha">Esqueci a senha</p>
 
                 <Button
-                    label = "Entrar"
-                    onClick = {handleLogin}
-                    width = "35%"
+                    label="Entrar"
+                    onClick={handleLogin}
+                    width="35%"
                 />
             </div>
             <div className="area-registrar">
