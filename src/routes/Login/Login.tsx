@@ -10,13 +10,8 @@ const Login = () => {
     const navigate = useNavigate();
 
     const [userLogin, setUserLogin] = useState<UserLoginProps>({
-<<<<<<< Updated upstream
         email:'',
         senha:''
-=======
-        email: '',
-        senha: ''
->>>>>>> Stashed changes
     })
 
     // Função para lidar com a mudança dos campos do formulário
