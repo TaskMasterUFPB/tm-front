@@ -11,7 +11,8 @@
     width: 100%;
     padding: 20px 40px;
     display: flex;
-    justify-content: space-between; /* Garante que o título e os botões fiquem nas extremidades */
+    justify-content: space-between;
+    /* Garante que o título e os botões fiquem nas extremidades */
     align-items: center;
 }
 
@@ -26,9 +27,11 @@ h1 {
 
 .area-btn {
     display: flex;
-    justify-content: flex-end; /* Alinha os botões à direita */
+    justify-content: flex-end;
+    /* Alinha os botões à direita */
     align-items: center;
-    gap: 10px; /* Espaçamento entre os botões */
+    gap: 10px;
+    /* Espaçamento entre os botões */
 }
 
 
@@ -158,8 +161,6 @@ tbody tr:last-child td {
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto;
-    background-color: rgb(0, 0, 0);
     background-color: rgba(0, 0, 0, 0.4);
     display: flex;
     justify-content: center;
@@ -171,14 +172,18 @@ tbody tr:last-child td {
     background-color: #fefefe;
     border-radius: 10px;
     box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1);
-    padding: 20px;
     border: 1px solid #888;
-    width: 90%;
-    height: 80%;
     border-radius: 8px;
-    position: relative;
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 1.5rem;
+
+    padding: 10rem;
+    width: 70vw;
+    height: 50vh;
+
 }
 
 /* Close button */
@@ -190,29 +195,38 @@ tbody tr:last-child td {
     cursor: pointer;
 }
 
-.modal-content .coluna-esquerda, .modal-content .coluna-central, .modal-content .coluna-direita {
+.modal-content .coluna-esquerda,
+.modal-content .coluna-central,
+.modal-content .coluna-direita .dados-coluna {
     display: flex;
-    flex-direction: column; /* Colocar os elementos um abaixo do outro */
-    align-items: flex-start; /* Alinhar os itens ao início da coluna */
-    width: calc(33.33% - 20px); /* Cada coluna ocupará 30% do espaço */
-}  
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    height: 100%;
+}
+
+.coluna-direita {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    height: 100%;
+}
 
 /* Inputs do formulário */
 .modal-content input {
-    width: 70%;
-    padding: 10px;
-    margin-bottom: 20px;
     border: 1px solid #ddd;
     border-radius: 4px;
+    width: 90%;
+    height: 3.5rem;
+    padding-left: 1rem;
 }
 
 .area-btns {
     display: flex;
-    justify-content: space-between; /* Espaçar os botões igualmente */
-    align-items: start; /* Alinha os botões verticalmente ao centro */
-    flex-direction: row; /* Certifique-se de que os botões estão alinhados na mesma linha */
+    justify-content: space-between;
+    gap: 1rem;
     width: 100%;
-    margin-top: 20px;
 }
 
 .input-container {
@@ -222,7 +236,7 @@ tbody tr:last-child td {
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 6px;
-    width: 70%;
+    width: 90%;
     height: 25%;
     background-color: #fff;
 }
@@ -230,7 +244,8 @@ tbody tr:last-child td {
 .tag {
     display: inline-flex;
     align-items: center;
-    background-color: #d7e9f7; /* Cor de fundo azul claro */
+    background-color: #d7e9f7;
+    /* Cor de fundo azul claro */
     color: #333;
     padding: 6px 12px;
     border-radius: 15px;

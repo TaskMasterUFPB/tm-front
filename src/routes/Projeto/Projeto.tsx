@@ -6,10 +6,10 @@ import './Projeto.css';
 
 const Projeto = () => {
     const [projeto, setProjeto] = useState<CriarProjetoProps>({
-        nome:'',
-        descricao:'',
+        nome: '',
+        descricao: '',
         lider: '',
-        url:'',
+        url: '',
         dataInicio: new Date(Date.now()),
         deletado: false
     });
@@ -55,16 +55,16 @@ const Projeto = () => {
     const deleteProject = (projectName: string) => {
         // Recuperar os projetos existentes no localStorage
         const storedProjects = JSON.parse(localStorage.getItem('projects') || '[]');
-    
+
         // Filtrar o projeto a ser removido com base no nome
         const updatedProjects = storedProjects.filter((project: CriarProjetoProps) => project.nome !== projectName);
-    
+
         // Atualizar o localStorage com a nova lista de projetos
         localStorage.setItem('projects', JSON.stringify(updatedProjects));
-    
+
         // Atualizar o estado para refletir a mudança na UI
         setProjects(updatedProjects);
-    
+
         alert('Projeto removido com sucesso!');
     };
 
@@ -80,7 +80,7 @@ const Projeto = () => {
         setShowModal(false);
     };
 
-    return(
+    return (
         <div className="area-projeto">
             <nav className="barra-de-pesquisa">
                 <h1>Logo</h1>
@@ -96,9 +96,9 @@ const Projeto = () => {
             </div>
 
             <div className="area-pesquisa-e-botao">
-                <input 
-                    type="text" 
-                    placeholder="Buscar por projeto" 
+                <input
+                    type="text"
+                    placeholder="Buscar por projeto"
                     onChange={(e) => setSearchTerm(e.target.value)}
                 />
                 <button id="btn-criar-projeto" onClick={handleOpenModal}>Criar projeto</button>
@@ -116,7 +116,7 @@ const Projeto = () => {
                         </tr>
                     </thead>
                     <tbody>
-                    {projects.filter(project =>
+                        {projects.filter(project =>
                             project.nome.toLowerCase().includes(searchTerm.toLowerCase()) ||
                             project.descricao.toLowerCase().includes(searchTerm.toLowerCase())
                         ).map((project, index) => (
@@ -146,24 +146,24 @@ const Projeto = () => {
                     <div className="modal-content">
                         <div className="coluna-esquerda">
                             <label>Nome</label>
-                            <input 
-                                type="text" 
+                            <input
+                                type="text"
                                 name="nome"
-                                placeholder="Digite o nome do projeto" 
+                                placeholder="Digite o nome do projeto"
                                 onChange={handleChange}
                             />
 
                             <label>Descrição</label>
-                            <input 
-                                type="text" 
+                            <input
+                                type="text"
                                 placeholder="Digite a descrição do projeto"
                                 name="descricao"
                                 onChange={handleChange}
                             />
 
                             <label>Líder</label>
-                            <input 
-                                type="text" 
+                            <input
+                                type="text"
                                 placeholder="Digite o nome do líder do projeto"
                                 name="lider"
                                 onChange={handleChange}
@@ -179,7 +179,7 @@ const Projeto = () => {
                         </div>
                         <div className="coluna-central">
                             <label>Adicionar participantes</label>
-                            <input 
+                            <input
                                 type="text"
                                 placeholder="E-mails dos indivíduos"
                             />
@@ -187,33 +187,47 @@ const Projeto = () => {
                             <div className="input-container">
                                 <div className="tag">Gustavo <span className="close-tag">x</span></div>
                             </div>
+
+                            <Button
+                                label="Adicionar participantes"
+                                width="98%"
+                            />
                         </div>
                         <div className="coluna-direita">
-                            <label>Cargos</label>
-                            <input
-                                type="text"
-                                placeholder="Dev, Analista, QA, etc"
-                            />
-                            <div className="input-container">
-                                <div className="tag">Dev <span className="close-tag">x</span></div>
+                            <div className="dados-coluna">
+                                <label>Cargos</label>
+                                <input
+                                    type="text"
+                                    placeholder="Dev, Analista, QA, etc"
+                                />
+                                <div className="input-container">
+                                    <div className="tag">Dev <span className="close-tag">x</span></div>
+                                </div>
+
+                                <Button
+                                    label="Adicionar cargo"
+                                    width="98%"
+                                />
                             </div>
-                            
 
                             <div className="area-btns">
 
-                                <Button 
+                                <Button
                                     label="Cancelar"
                                     onClick={handleCloseModal}
-                                    width="150px"
+                                    width="10rem"
+                                    backgroundColor="white"
+                                    color="#0886E1"
+                                    border="1px solid #0886E1"
                                 />
                                 <Button
                                     label="Criar"
                                     onClick={handleSubmit}
-                                    width="150px"
+                                    width="10rem"
                                 />
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
             )}
