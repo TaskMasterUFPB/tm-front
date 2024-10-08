@@ -64,20 +64,11 @@ const Projeto = () => {
         }
     }
 
-    // Lista de projetos simulada (pode vir de uma API)
-    async function listarProjetos(id: string) {
-        try {
-            const resposta = await projetoApi.listaProjetos(id);
-            setProjetos(resposta.data)
-        } catch (error) {
-            alert("Erro ao listar projetos")
-        }
-    }
-
     async function listarProjetosParticipantes(id: string) {
         try {
             const resposta = await projetoApi.listaProjetosParticipante(id);
-            setProjetos(prevProjetos => prevProjetos.concat(resposta.data))
+            const todosProjetos = Object.values(resposta.data).flat() as ProjetoProps[];
+            setProjetos(todosProjetos)
         } catch (error) {
             alert("Erro ao listar projetos")
         }
@@ -88,7 +79,6 @@ const Projeto = () => {
         if (token) {
             const decode: DecodedToken = jwtDecode(token)
             setId(decode.id)
-            listarProjetos(decode.id);
             listarProjetosParticipantes(decode.id);
         }
     }, [id])
