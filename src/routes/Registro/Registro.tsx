@@ -2,6 +2,7 @@ import { UserRegistroProps } from "../../types/UserRegistro";
 import { Link, useNavigate } from "react-router-dom"; // Certifique-se de que o useNavigate está importado
 import { useState } from "react";
 import './Registro.css';
+import { usuarioApi } from "../../server/usuario";
 
 const Registro = () => {
     const navigate = useNavigate(); // useNavigate declarado corretamente
@@ -24,13 +25,13 @@ const Registro = () => {
     // Função para salvar o usuário no localStorage
     const handleSubmit = () => {
         if (user.nome && user.email && (user.senha === user.confirmarSenha)) {
+            // Salva o usuário no localStorage
             localStorage.setItem('user', JSON.stringify(user));
             alert('Usuário registrado com sucesso!');
-            console.log('Usuário registrado:', user);
-            navigate('/login'); // Redireciona para a tela de login após registro bem-sucedido
+            navigate("/");
         } else if (user.senha !== user.confirmarSenha) {
-            alert('Os campos de Senha e Confirmar Senha devem ser idênticos.');
-        } else {
+            alert('Os campos de Senha e Confirmar Senha devem ser idênticos. Por favor, verifique e tente novamente.')
+        }else {
             alert('Por favor, preencha todos os campos!');
         }
     };
@@ -43,18 +44,18 @@ const Registro = () => {
             </div>
             <div className="area-caixa-formulario-r">
                 <div className="campo-formulario-r">
-                    <input 
+                    <input
                         type="text"
                         name="nome"
-                        placeholder="Nome completo" 
+                        placeholder="Nome completo"
                         id="campo-email-r"
                         value={user.nome}
                         onChange={handleChange}
                     />
                 </div>
                 <div className="campo-formulario-r">
-                    <input 
-                        type="text" 
+                    <input
+                        type="text"
                         name="email"
                         placeholder="Email"
                         value={user.email}
@@ -62,20 +63,20 @@ const Registro = () => {
                     />
                 </div>
                 <div className="campo-formulario-r">
-                    <input 
+                    <input
                         type="password"
                         name="senha"
                         placeholder="Senha"
                         value={user.senha}
-                        onChange={handleChange} 
+                        onChange={handleChange}
                     />
                 </div>
                 <div className="campo-formulario-r">
-                    <input 
-                        type="password" 
+                    <input
+                        type="password"
                         name="confirmarSenha"
                         value={user.confirmarSenha}
-                        placeholder="Confirmar senha" 
+                        placeholder="Confirmar senha"
                         onChange={handleChange}
                     />
                 </div>
