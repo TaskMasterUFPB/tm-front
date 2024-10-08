@@ -1,0 +1,39 @@
+header {
+    width: 100%;
+}
+
+.barra_de_pesquisa {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    /* Garante que o título e os botões fiquem nas extremidades */
+    align-items: center;
+}
+
+.barra_de_pesquisa h1,
+.barra_de_pesquisa button {
+    color: #333;
+}
+
+h1 {
+    font-size: 30px;
+}
+
+.area_btn {
+    display: flex;
+    justify-content: flex-end;
+    /* Alinha os botões à direita */
+    align-items: center;
+    gap: 10px;
+    /* Espaçamento entre os botões */
+}
+
+
+.area_btn button {
+    padding: 8px 16px;
+    background-color: #0886E1;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
