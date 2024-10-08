@@ -6,6 +6,7 @@ import { ProjetoProps } from "../../types/Projeto";
 import { jwtDecode } from "jwt-decode";
 import { DecodedToken } from "../../types/Jwt";
 import Button from "../../components/button/Button";
+import { Header } from "../../components/header";
 
 const Projeto = () => {
     const [searchTerm, setSearchTerm] = useState("");
@@ -70,14 +71,7 @@ const Projeto = () => {
 
     return (
         <div className="area-projeto">
-            <nav className="barra-de-pesquisa">
-                <h1>Logo</h1>
-                <div className="area-btn">
-                    <button className="configuracao">Configurações</button>
-                    <button className="sair">Sair</button>
-                </div>
-            </nav>
-
+            <Header />
             <div className="texto-projeto">
                 <h1>Meus projetos</h1>
                 <p>Seja bem-vindo a lista com todos os projetos que você está envolvido</p>
