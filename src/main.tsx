@@ -1,43 +1,46 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import App from './App.tsx'
-import './index.css'
-
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-
-//Pages
-import Login from './routes/Login/Login.tsx';
-import Registro from './routes/Registro/Registro.tsx';
-import Task from './routes/Task/Task.tsx'
-import Projeto from './routes/Projeto/Projeto.tsx';
+import App from './App';
+import Login from './routes/Login/Login';
+import Registro from './routes/Registro/Registro';
+import Task from './routes/Task/Task';
+import Projeto from './routes/Projeto/Projeto';
+import './index.css';
+import Logo from './components/logo';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <App />,  // O App gerencia o roteamento e autenticação
     children: [
       {
-        path:"/",
-        element: <Login />
+        path: "/login",
+        element: <Login />,
       },
       {
-        path:"/registro",
-        element: <Registro />
+        path: "/registro",
+        element: <Registro />,
       },
       {
-        path:"/task",
-        element: <Task/>
+        path: "/task",
+        element: <Task />,
       },
       {
-        path:"/projeto",
-        element:<Projeto/>
+        path: "/projeto",
+        element: <Projeto />,
+      },
+      {
+        path: "/logo",
+        element: <Logo />,
       }
     ]
   }
-])
+]);
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <RouterProvider router={router} />
   </StrictMode>,
-)
+);
+

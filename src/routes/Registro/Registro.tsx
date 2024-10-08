@@ -1,11 +1,11 @@
 import { UserRegistroProps } from "../../types/UserRegistro";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; // Certifique-se de que o useNavigate está importado
 import { useState } from "react";
 import './Registro.css';
 import { usuarioApi } from "../../server/usuario";
 
 const Registro = () => {
-    const navigate = useNavigate();
+    const navigate = useNavigate(); // useNavigate declarado corretamente
 
     const [user, setUser] = useState<UserRegistroProps>({
         nome: '',
@@ -22,37 +22,19 @@ const Registro = () => {
         });
     };
 
-
-    async function handleSubmit() {
-        try {
-            const resposta = await usuarioApi.registrar({
-                nome: user.nome,
-                email: user.email,
-                senha: user.senha,
-                cargo: 'FUNCIONARIO'
-            })
-
-            if (user.senha !== user.confirmarSenha) {
-                alert('Os campos de Senha e Confirmar Senha devem ser idênticos. Por favor, verifique e tente novamente.')
-            }
-            if (resposta.status === 201) {
-                localStorage.setItem('userJwt', resposta.data.token)
-                navigate('/')
-            }
-        } catch (error) {
-            resetaForm()
-            alert('Erro ao criar usuário!')
+    // Função para salvar o usuário no localStorage
+    const handleSubmit = () => {
+        if (user.nome && user.email && (user.senha === user.confirmarSenha)) {
+            // Salva o usuário no localStorage
+            localStorage.setItem('user', JSON.stringify(user));
+            alert('Usuário registrado com sucesso!');
+            navigate("/");
+        } else if (user.senha !== user.confirmarSenha) {
+            alert('Os campos de Senha e Confirmar Senha devem ser idênticos. Por favor, verifique e tente novamente.')
+        }else {
+            alert('Por favor, preencha todos os campos!');
         }
-    }
-
-    function resetaForm() {
-        setUser({
-            nome: '',
-            email: '',
-            senha: '',
-            confirmarSenha: ''
-        })
-    }
+    };
 
     return (
         <div className="area-registro">
@@ -100,11 +82,11 @@ const Registro = () => {
                 </div>
                 <button onClick={handleSubmit}>Criar</button>
                 <p>
-                    <Link to='/'>Voltar para login</Link>
+                    <Link to='/login'>Voltar para login</Link> {/* Link para login */}
                 </p>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default Registro;
