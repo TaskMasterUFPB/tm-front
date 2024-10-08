@@ -4,13 +4,14 @@ import { useState } from "react";
 import Input from "../../components/input/Input";
 import Button from "../../components/button/Button";
 import './Login.css'
+import { usuarioApi } from "../../server/usuario";
 
 const Login = () => {
     const navigate = useNavigate();
 
     const [userLogin, setUserLogin] = useState<UserLoginProps>({
-        email:'',
-        senha:''
+        email: '',
+        senha: ''
     })
 
     // Função para lidar com a mudança dos campos do formulário
@@ -21,23 +22,21 @@ const Login = () => {
         });
     };
 
-    // Função para fazer o login
-    const handleLogin = () => {
-        const savedUser = localStorage.getItem('user');
-        if (savedUser) {
-            const user = JSON.parse(savedUser);
+    async function handleLogin() {
+        try {
+            const resposta = await usuarioApi.login(
+                userLogin.email,
+                userLogin.senha
+            )
 
-            // Verifica se o email e a senha correspondem
-            if (user.email === userLogin.email && user.senha === userLogin.senha) {
-                alert('Login bem-sucedido!');
-                navigate('/projeto'); // Redireciona para a página principal (exemplo)
-            } else {
-                alert('Email ou senha incorretos!');
+            if (resposta.status === 200) {
+                localStorage.setItem('userJwt', resposta.data.token)
+                navigate('/projeto')
             }
-        } else {
-            alert('Usuário não encontrado! Por favor, registre-se.');
+        } catch (error) {
+            alert('Email ou senha incorretos!')
         }
-    };
+    }
 
     return (
         <div className="area-login">
@@ -45,38 +44,38 @@ const Login = () => {
                 <h1>Bem-vindo</h1>
                 <p>Acesse utilizando seu e-mail e senha.</p>
             </div>
-            <div className="area-caixa-formulario">           
-
+            <div className="area-caixa-formulario">
                 <div className="campo-formulario-email">
                     <Input
-                        id = "email"
-                        name = "email"
-                        type = "email"
-                        value = {userLogin.email}
-                        onChange = {handleChange}
-                        placeholder = "Email"
-                        width = "65%"
+                        id="email"
+                        name="email"
+                        type="email"
+                        value={userLogin.email}
+                        onChange={handleChange}
+                        placeholder="Email"
+                        width="65%"
                     />
                 </div>
 
                 <div className="campo-formulario-senha">
                     <Input
-                        id = "senha"
-                        name = "senha"
-                        type = "password"
-                        value = {userLogin.senha}
-                        onChange = {handleChange}
-                        placeholder = "Senha"
-                        width = "65%"
+                        id="senha"
+                        name="senha"
+                        type="password"
+                        value={userLogin.senha}
+                        onChange={handleChange}
+                        placeholder="Senha"
+                        width="65%"
                     />
                 </div>
-                
+
+
                 <p id="alterar-senha">Esqueci a senha</p>
 
                 <Button
-                    label = "Entrar"
-                    onClick = {handleLogin}
-                    width = "35%"
+                    label="Entrar"
+                    onClick={handleLogin}
+                    width="35%"
                 />
             </div>
             <div className="area-registrar">
@@ -84,7 +83,7 @@ const Login = () => {
                     Não possui conta? <Link to='/registro'><b>Registre-se</b></Link>
                 </p>
             </div>
-        </div>
+        </div >
     )
 }
 
