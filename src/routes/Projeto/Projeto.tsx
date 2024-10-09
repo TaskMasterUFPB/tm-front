@@ -1,48 +1,75 @@
-import { Link, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import './Projeto.css';
 import { projetoApi } from "../../server/projeto";
-import { ProjetoProps } from "../../types/Projeto";
+import { NovoProjeto, ProjetoProps } from "../../types/Projeto";
 import { jwtDecode } from "jwt-decode";
 import { DecodedToken } from "../../types/Jwt";
 import Button from "../../components/button/Button";
+import { Header } from "../../components/header";
 
 const Projeto = () => {
     const [searchTerm, setSearchTerm] = useState("");
     const [projetos, setProjetos] = useState<ProjetoProps[]>([]);
+    const [novoProjeto, setNovoProjeto] = useState<NovoProjeto>({
+        nome: "",
+        descricao: "",
+        url: "",
+        id_criador: "",
+        email_lider: "",
+        emailParticipantes: []
+    });
     const [id, setId] = useState("");
-
     const [showModal, setShowModal] = useState(false);
     let maxRows = 6;
     let emptyRows = maxRows - projetos.length;
 
     // Função para lidar com a mudança dos campos do formulário
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setProjetos({
-            ...projetos,
-            [e.target.name]: e.target.value,
-        });
-    };
+    function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+        const { name, value } = e.target;
+
+        if (name === "emailParticipantes") {
+            const participantes = value.split(",").map(email => email.trim()); // Separa e remove espaços
+            setNovoProjeto(prevProjeto => ({
+                ...prevProjeto,
+                emailParticipantes: participantes
+            }))
+        } else {
+            setNovoProjeto({
+                ...novoProjeto,
+                [e.target.name]: e.target.value,
+            });
+        }
+    }
+
+    console.log(novoProjeto)
 
     // Função para salvar o projeto
-    const handleSubmit = () => {
-
-    };
-
-    // Lista de projetos simulada (pode vir de uma API)
-    async function listarProjetos(id: string) {
+    async function handleSubmit() {
         try {
-            const resposta = await projetoApi.listaProjetos(id);
-            setProjetos(resposta.data)
+            const resposta = await projetoApi.criarProjeto({
+                nome: novoProjeto.nome,
+                descricao: novoProjeto.descricao,
+                url: novoProjeto.url,
+                id_criador: id,
+                email_lider: novoProjeto.email_lider,
+                emailParticipantes: novoProjeto.emailParticipantes,
+            })
+            if (resposta.status === 201) {
+                alert('Projeto criado com sucesso!')
+                handleCloseModal()
+                resetaForm()
+            }
         } catch (error) {
-            alert("Erro ao listar projetos")
+            alert('Erro ao criar projeto!')
+            resetaForm()
         }
     }
 
     async function listarProjetosParticipantes(id: string) {
         try {
             const resposta = await projetoApi.listaProjetosParticipante(id);
-            setProjetos(prevProjetos => prevProjetos.concat(resposta.data))
+            const todosProjetos = Object.values(resposta.data).flat() as ProjetoProps[];
+            setProjetos(todosProjetos)
         } catch (error) {
             alert("Erro ao listar projetos")
         }
@@ -53,7 +80,6 @@ const Projeto = () => {
         if (token) {
             const decode: DecodedToken = jwtDecode(token)
             setId(decode.id)
-            listarProjetos(decode.id);
             listarProjetosParticipantes(decode.id);
         }
     }, [id])
@@ -66,18 +92,24 @@ const Projeto = () => {
     // Função para fechar o modal
     const handleCloseModal = () => {
         setShowModal(false);
+        resetaForm()
     };
+
+    function resetaForm() {
+        setNovoProjeto({
+            nome: "",
+            descricao: "",
+            url: "",
+            id_criador: "",
+            participantes_id: [],
+            email_lider: "",
+            emailParticipantes: []
+        })
+    }
 
     return (
         <div className="area-projeto">
-            <nav className="barra-de-pesquisa">
-                <h1>Logo</h1>
-                <div className="area-btn">
-                    <button className="configuracao">Configurações</button>
-                    <button className="sair">Sair</button>
-                </div>
-            </nav>
-
+            <Header />
             <div className="texto-projeto">
                 <h1>Meus projetos</h1>
                 <p>Seja bem-vindo a lista com todos os projetos que você está envolvido</p>
@@ -112,7 +144,7 @@ const Projeto = () => {
                             <tr key={project.id}>
                                 <td>{project.nome}</td>
                                 <td>{project.descricao}</td>
-                                <td>{project.lider}</td>
+                                <td>{project.email_lider}</td>
                                 <td><a href={`${project.url}`} target="_blank" rel="noopener noreferrer">{project.url}</a></td>
                                 <td>...</td>
                             </tr>
@@ -135,6 +167,7 @@ const Projeto = () => {
                             <input
                                 type="text"
                                 name="nome"
+                                value={novoProjeto.nome}
                                 placeholder="Digite o nome do projeto"
                                 onChange={handleChange}
                             />
@@ -144,14 +177,16 @@ const Projeto = () => {
                                 type="text"
                                 placeholder="Digite a descrição do projeto"
                                 name="descricao"
+                                value={novoProjeto.descricao}
                                 onChange={handleChange}
                             />
 
                             <label>Líder</label>
                             <input
                                 type="text"
-                                placeholder="Digite o nome do líder do projeto"
-                                name="lider"
+                                placeholder="Digite o email do líder do projeto"
+                                name="email_lider"
+                                value={novoProjeto.email_lider}
                                 onChange={handleChange}
                             />
 
@@ -159,45 +194,30 @@ const Projeto = () => {
                             <input
                                 type="text"
                                 name="url"
+                                value={novoProjeto.url}
                                 onChange={handleChange}
                                 placeholder="Digite a URL do projeto"
                             />
                         </div>
                         <div className="coluna-central">
+
                             <label>Adicionar participantes</label>
                             <input
                                 type="text"
+                                name="emailParticipantes"
+                                value={novoProjeto.emailParticipantes}
+                                onChange={handleChange}
                                 placeholder="E-mails dos indivíduos"
                             />
 
-                            <div className="input-container">
-                                <div className="tag">Gustavo <span className="close-tag">x</span></div>
-                            </div>
 
-                            <Button
-                                label="Adicionar participantes"
-                                width="98%"
+                            <label>Cargos</label>
+                            <input
+                                type="text"
+                                placeholder="Dev, Analista, QA, etc"
                             />
-                        </div>
-                        <div className="coluna-direita">
-                            <div className="dados-coluna">
-                                <label>Cargos</label>
-                                <input
-                                    type="text"
-                                    placeholder="Dev, Analista, QA, etc"
-                                />
-                                <div className="input-container">
-                                    <div className="tag">Dev <span className="close-tag">x</span></div>
-                                </div>
-
-                                <Button
-                                    label="Adicionar cargo"
-                                    width="98%"
-                                />
-                            </div>
 
                             <div className="area-btns">
-
                                 <Button
                                     label="Cancelar"
                                     onClick={handleCloseModal}
@@ -213,7 +233,6 @@ const Projeto = () => {
                                 />
                             </div>
                         </div>
-
                     </div>
                 </div>
             )}
