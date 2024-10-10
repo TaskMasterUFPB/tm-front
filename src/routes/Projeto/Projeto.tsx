@@ -4,6 +4,7 @@ import { projetoApi } from "../../server/projeto";
 import { NovoProjeto, ProjetoProps } from "../../types/Projeto";
 import { jwtDecode } from "jwt-decode";
 import { DecodedToken } from "../../types/Jwt";
+import Input from "../../components/input/Input";
 import Button from "../../components/button/Button";
 import { Header } from "../../components/header";
 
@@ -16,8 +17,10 @@ const Projeto = () => {
         url: "",
         id_criador: "",
         email_lider: "",
-        emailParticipantes: []
+        emailParticipantes: [],
     });
+    //Add cargos
+    const [cargo, setCargos] = useState("");
     const [id, setId] = useState("");
     const [showModal, setShowModal] = useState(false);
     let maxRows = 6;
@@ -61,6 +64,7 @@ const Projeto = () => {
             }
         } catch (error) {
             alert('Erro ao criar projeto!')
+            setCargos("")
             resetaForm()
         }
     }
@@ -92,7 +96,8 @@ const Projeto = () => {
     // Função para fechar o modal
     const handleCloseModal = () => {
         setShowModal(false);
-        resetaForm()
+        resetaForm();
+        setCargos("");
     };
 
     function resetaForm() {
@@ -103,8 +108,9 @@ const Projeto = () => {
             id_criador: "",
             participantes_id: [],
             email_lider: "",
-            emailParticipantes: []
+            emailParticipantes: [],
         })
+        setCargos("");
     }
 
     return (
@@ -116,12 +122,19 @@ const Projeto = () => {
             </div>
 
             <div className="area-pesquisa-e-botao">
-                <input
+                <Input
                     type="text"
-                    placeholder="Buscar por projeto"
+                    value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
+                    placeholder="Buscar por projeto"
+                    width="25%"
                 />
-                <button id="btn-criar-projeto" onClick={handleOpenModal}>Criar projeto</button>
+                <Button
+                    id="btn-criar-projeto"
+                    label="Criar Projeto"
+                    onClick={handleOpenModal}
+                    width="10rem"
+                />
             </div>
 
             <div className="caixa-projetos">
@@ -164,61 +177,87 @@ const Projeto = () => {
                     <div className="modal-content">
                         <div className="coluna-esquerda">
                             <label>Nome</label>
-                            <input
-                                type="text"
+                            <Input
+                                id="campo-nome-projeto"
                                 name="nome"
+                                type="text"
                                 value={novoProjeto.nome}
-                                placeholder="Digite o nome do projeto"
                                 onChange={handleChange}
+                                placeholder="Digite o nome do projeto"
+                                width="30rem"
+                                height="1rem"
+                                padding="1rem"
                             />
 
                             <label>Descrição</label>
-                            <input
-                                type="text"
-                                placeholder="Digite a descrição do projeto"
+                            <Input
+                                id="campo-descricao-projeto"
                                 name="descricao"
+                                type="text"
                                 value={novoProjeto.descricao}
                                 onChange={handleChange}
+                                placeholder="Digite a descrição do projeto"
+                                width="30rem"
+                                height="1rem"
+                                padding="1rem"
                             />
 
                             <label>Líder</label>
-                            <input
-                                type="text"
-                                placeholder="Digite o email do líder do projeto"
+                            <Input
+                                id="campo-email-lider"
                                 name="email_lider"
+                                type="text"
                                 value={novoProjeto.email_lider}
                                 onChange={handleChange}
+                                placeholder="Digite o email do líder do projeto"
+                                width="30rem"
+                                height="1rem"
+                                padding="1rem"
                             />
 
                             <label>URL</label>
-                            <input
-                                type="text"
+                            <Input
+                                id="campo-url-projeto"
                                 name="url"
+                                type="text"
                                 value={novoProjeto.url}
                                 onChange={handleChange}
                                 placeholder="Digite a URL do projeto"
+                                width="30rem"
+                                height="1rem"
+                                padding="1rem"
                             />
+
                         </div>
                         <div className="coluna-central">
 
                             <label>Adicionar participantes</label>
-                            <input
-                                type="text"
+                            <Input
+                                id="campo-email-participantes"
                                 name="emailParticipantes"
-                                value={novoProjeto.emailParticipantes}
+                                type="text"
+                                value={novoProjeto.emailParticipantes.join(", ")}
                                 onChange={handleChange}
                                 placeholder="E-mails dos indivíduos"
+                                width="30rem"
+                                height="1rem"
+                                padding="1rem"
                             />
 
-
                             <label>Cargos</label>
-                            <input
+                            <Input
                                 type="text"
+                                value={cargo}
+                                onChange={(e) => setCargos(e.target.value)}
                                 placeholder="Dev, Analista, QA, etc"
+                                width="30rem"
+                                height="1rem"
+                                padding="1rem"
                             />
 
                             <div className="area-btns">
                                 <Button
+                                    id="button-cancelar-projeto"
                                     label="Cancelar"
                                     onClick={handleCloseModal}
                                     width="10rem"
@@ -227,6 +266,7 @@ const Projeto = () => {
                                     border="1px solid #0886E1"
                                 />
                                 <Button
+                                    id="button-criar-projeto"
                                     label="Criar"
                                     onClick={handleSubmit}
                                     width="10rem"

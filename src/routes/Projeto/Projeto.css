@@ -33,7 +33,6 @@
 .area-pesquisa-e-botao input[type="text"] {
     width: 25%;
     padding: 10px;
-    border: 1px solid #ccc;
     border-radius: 4px;
 }
 
@@ -185,7 +184,7 @@ tbody tr:last-child td {
     border: 1px solid #ddd;
     border-radius: 4px;
     width: 30rem;
-    height: 3.5rem;
+    height: 3rem;
     padding-left: 1rem;
 }
 

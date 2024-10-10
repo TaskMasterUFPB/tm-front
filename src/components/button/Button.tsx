@@ -3,20 +3,22 @@ import './Button.css';
 
 // Definindo o tipo das props
 interface ButtonProps {
+    id?: string;
     label: string;
     onClick?: () => void;
     disabled?: boolean;
     // Tamanho do Button opcional como prop
     width?: string;
-    height?: string
-    color?: string
-    backgroundColor?: string
-    border?: string
+    height?: string;
+    color?: string;
+    backgroundColor?: string;
+    border?: string;
 }
 
-const Button: React.FC<ButtonProps> = ({ label, onClick, disabled = false, height = 'auto', width = 'auto', color, backgroundColor, border }) => {
+const Button: React.FC<ButtonProps> = ({ id, label, onClick, disabled = false, width = 'auto', height = 'auto', color, backgroundColor, border }) => {
     return (
         <button
+            id={id}
             className={`button-customizavel ${disabled ? 'disabled' : ''}`}
             onClick={onClick}
             disabled={disabled}
