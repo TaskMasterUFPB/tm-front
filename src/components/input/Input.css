@@ -18,7 +18,7 @@
   
   /* Estilo quando o input está focado */
   .input-customizavel.inputfocado {
-    border: 2px solid #0886E1; /* Altera a cor da borda */
+    border: 1px solid #0886E1; /* Altera a cor da borda */
     background-color: #f0f0f0;
     overflow: auto; /* Agora o overflow será rolável */
   }

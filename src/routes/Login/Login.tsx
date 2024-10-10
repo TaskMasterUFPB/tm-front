@@ -73,6 +73,7 @@ const Login = () => {
                 <p id="alterar-senha">Esqueci a senha</p>
 
                 <Button
+                    id="button-entrar"
                     label="Entrar"
                     onClick={handleLogin}
                     width="35%"

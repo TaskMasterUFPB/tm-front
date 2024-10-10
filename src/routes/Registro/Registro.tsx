@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import './Registro.css';
 import { usuarioApi } from "../../server/usuario";
+import Input from "../../components/input/Input";
+import Button from "../../components/button/Button";
 
 const Registro = () => {
     const navigate = useNavigate();
@@ -22,8 +24,13 @@ const Registro = () => {
         });
     };
 
-
     async function handleSubmit() {
+        // Verifica se as senhas coincidem
+        if (user.senha !== user.confirmarSenha) {
+            alert('Os campos de Senha e Confirmar Senha devem ser idênticos. Por favor, verifique e tente novamente.');
+            return false;
+        }
+        
         try {
             const resposta = await usuarioApi.registrar({
                 nome: user.nome,
@@ -32,9 +39,6 @@ const Registro = () => {
                 cargo: 'FUNCIONARIO'
             })
 
-            if (user.senha !== user.confirmarSenha) {
-                alert('Os campos de Senha e Confirmar Senha devem ser idênticos. Por favor, verifique e tente novamente.')
-            }
             if (resposta.status === 201) {
                 localStorage.setItem('userJwt', resposta.data.token)
                 navigate('/')
@@ -62,43 +66,55 @@ const Registro = () => {
             </div>
             <div className="area-caixa-formulario-r">
                 <div className="campo-formulario-r">
-                    <input
-                        type="text"
-                        name="nome"
-                        placeholder="Nome completo"
+                    <Input
                         id="campo-email-r"
+                        name="nome"
+                        type="text"
                         value={user.nome}
                         onChange={handleChange}
+                        placeholder="Nome Completo"
+                        width="65%"
                     />
                 </div>
                 <div className="campo-formulario-r">
-                    <input
-                        type="text"
+                    <Input
+                        id="email"
                         name="email"
-                        placeholder="Email"
+                        type="email"
                         value={user.email}
                         onChange={handleChange}
+                        placeholder="Email"
+                        width="65%"
                     />
                 </div>
                 <div className="campo-formulario-r">
-                    <input
-                        type="password"
+                    <Input
+                        id="senha"
                         name="senha"
-                        placeholder="Senha"
+                        type="password"
                         value={user.senha}
                         onChange={handleChange}
+                        placeholder="Senha"
+                        width="65%"
                     />
                 </div>
                 <div className="campo-formulario-r">
-                    <input
-                        type="password"
+                    <Input
+                        id="confirmar-senha"
                         name="confirmarSenha"
+                        type="password"
                         value={user.confirmarSenha}
-                        placeholder="Confirmar senha"
                         onChange={handleChange}
+                        placeholder="Confirmar Senha"
+                        width="65%"
                     />
                 </div>
-                <button onClick={handleSubmit}>Criar</button>
+                <Button
+                    id="button-criar"
+                    label="Criar"
+                    onClick={handleSubmit}
+                    width="35%"
+                />
                 <p>
                     <Link to='/'>Voltar para login</Link>
                 </p>
